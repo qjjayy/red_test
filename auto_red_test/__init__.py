@@ -1,0 +1,1 @@
+from generate_test_case import generate_red_test
