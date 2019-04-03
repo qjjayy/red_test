@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import os
-import yaml
 import time
 import uuid
 import collections
 from bson import ObjectId
 from faker import Faker
+from faker_config import faker_config
 
 
 # 为了减少依赖，从Thrift中拷贝过来
@@ -33,17 +32,13 @@ fake = Faker()
 LIST_COUNT = 2
 MAP_COUNT = 2
 
-faker_yaml = yaml.load(
-    open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'faker.yaml')),
-    Loader=yaml.BaseLoader
-)
 
 INT_CONFIG = collections.OrderedDict()
 UNICODE_CONFIG = collections.OrderedDict()
-for fake_function, param_names in faker_yaml.get('int').items():
+for fake_function, param_names in faker_config.get('int').items():
     for param_name in param_names:
         INT_CONFIG[param_name] = fake_function
-for fake_function, param_names in faker_yaml.get('unicode').items():
+for fake_function, param_names in faker_config.get('unicode').items():
     for param_name in param_names:
         UNICODE_CONFIG[param_name] = fake_function
 
