@@ -267,6 +267,6 @@ def generate_red_test(root_path, test_handler, test_service, test_request):
 # if __name__ == '__main__':
 #     测试案例
 #     from handler.stockage_handler import StockageHandler
-#     import stockage_service.request.ttypes as all_request
-#     import stockage_service.StockageService as whole_service
-#     generate_red_test(ENV['root'], StockageHandler, whole_service, all_request)
+#     import stockage_service.request.ttypes as test_request
+#     import stockage_service.StockageService as test_service
+#     generate_red_test(ENV['root'], StockageHandler, test_service, test_request)

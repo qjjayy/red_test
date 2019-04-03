@@ -14,11 +14,11 @@
 ```javascript
 from auto_red_test import generate_red_test
 from frame import ENV
-from handler.stockage_handler import StockageHandler as test_handler  # 需要单测的handler
+from handler.stockage_handler import StockageHandler  # 需要单测的handler
 import stockage_service.request.ttypes as test_request  # idl的request文件
 import stockage_service.StockageService as test_service  # idl的service文件
 root_path = ENV['root']  # 项目的根目录
-generate_red_test(root_path, test_handler, test_service, test_request)
+generate_red_test(root_path, StockageHandler, test_service, test_request)
 ```
 * 自动生成的单测框架如下：
 * ![image](https://raw.githubusercontent.com/qjjayy/red_test/master/image/red_test.jpeg)
