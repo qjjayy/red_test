@@ -19,7 +19,7 @@ with open(path.join(basedir, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='auto-red-test',  # 包名称
-    version='0.1.5',  # 版本
+    version='0.1.6',  # 版本
     url='https://github.com/qjjayy/red_test',
     license='MIT',
     author='Junjie Qiu',
