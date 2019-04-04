@@ -1,62 +1,63 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-faker_config = {
-    'int': {
-        'date_time_this_month': [
+import collections
+faker_config = collections.OrderedDict(
+    int=collections.OrderedDict(
+        date_time_this_month=[
             'date', 'time'
         ]
-    },
-    'unicode': {
-        'country_code': [
+    ),
+    unicode=collections.OrderedDict(
+        country_code=[
             'country_code'
         ],
-        'address': [
+        address=[
             'address', 'street'
         ],
-        'postcode': [
+        postcode=[
             'postcode'
         ],
-        'zipcode': [
+        zipcode=[
             'zipcode'
         ],
-        'city': [
+        city=[
             'city'
         ],
-        'country': [
+        country=[
             'country'
         ],
-        'ean8': [
+        ean8=[
             'code', '_no', '_number'
         ],
-        'company': [
+        company=[
             'company'
         ],
-        'currency_code': [
+        currency_code=[
             'currency'
         ],
-        'free_email': [
+        free_email=[
             'email'
         ],
-        'url': [
+        url=[
             'url', 'attachment'
         ],
-        'job': [
+        job=[
             'job', 'role'
         ],
-        'text': [
+        text=[
             'text', 'note'
         ],
-        'name': [
+        name=[
             'name'
         ],
-        'phone_number': [
+        phone_number=[
             'phone'
         ],
-        'uuid': [
+        uuid=[
             'uuid'
         ],
-        'object_id': [
+        object_id=[
             'id'
         ]
-    }
-}
+    )
+)
