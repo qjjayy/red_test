@@ -23,7 +23,7 @@ root_path = ENV['root']  # 项目的根目录
 generate_red_test(root_path, StockageHandler, test_service, test_request)
 ```
 * 自动生成的单测框架如下：
-* ![image](https://raw.githubusercontent.com/qjjayy/red_test/master/image/test_red.jpeg)
+* ![image](https://raw.githubusercontent.com/qjjayy/red_test/master/image/test_red.jpg)
 
 ## 补充内容
 * 第一次运行会生成request_config.yaml，可以自定义单测方法的参数，用于解决一个单测方法用到多个request的特殊情况，
