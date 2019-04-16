@@ -82,7 +82,7 @@ def _fake_list(attr_name, ttype_conf):
 
 
 def _fake_set(attr_name, ttype_conf):
-    return set(_fake_list(ttype_conf))
+    return set(_fake_list(attr_name, ttype_conf))
 
 
 def _fake_map(attr_name, ttype_conf):

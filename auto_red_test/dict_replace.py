@@ -50,6 +50,8 @@ def _replace_dict(attr_name, from_dict, to_dict):
             to_type = __get_value_type(value)
             if from_type == to_type:
                 replace_param(key, from_type, from_dict, to_dict)
+            elif from_dict[key] is None:  # 弥补None导致类型不符的特殊情况
+                to_dict[key] = from_dict[key]
 
 
 _REPLACE_FUNC = {
