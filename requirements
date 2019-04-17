@@ -2,3 +2,4 @@ pyaml
 Faker==1.0.4
 bson
 pytest==3.6.2
+dictdiffer

@@ -39,13 +39,10 @@ faker_config = collections.OrderedDict(
             'email'
         ],
         url=[
-            'url', 'attachment'
+            'url', 'attachment', 'photo'
         ],
         job=[
             'job', 'role'
-        ],
-        text=[
-            'text', 'note'
         ],
         name=[
             'name'

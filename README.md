@@ -9,6 +9,7 @@
     pip install pyaml
     pip install Faker==1.0.4
     pip install bson
+    pip install dictdiffer
 ```
 
 ## 示例代码

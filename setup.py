@@ -19,7 +19,7 @@ with open(path.join(basedir, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='auto-red-test',  # 包名称
-    version='0.1.9',  # 版本
+    version='0.2.0',  # 版本
     url='https://github.com/qjjayy/red_test',
     license='MIT',
     author='Junjie Qiu',
@@ -31,7 +31,7 @@ setup(
     packages=['auto_red_test'],  # 包含的包列表
     zip_safe=False,
     include_package_data=False,
-    install_requires=['pytest', 'pyaml', 'Faker', 'bson'],
+    install_requires=['pytest', 'pyaml', 'Faker', 'bson', 'dictdiffer'],
     keywords='auto red test',
     classifiers=[
         'Intended Audience :: Developers',

@@ -65,14 +65,14 @@ def _fake_int(attr_name, ttype_conf):
 
 
 def _fake_float(attr_name, ttype_conf):
-    return fake.pyfloat(left_digits=2, right_digits=3)
+    return fake.pyfloat(left_digits=2, right_digits=3, positive=True)
 
 
 def _fake_unicode(attr_name, ttype_conf):
     ret = __special_unicode_fake(attr_name)
     if ret:
         return ret
-    return unicode(fake.pystr(max_chars=5))
+    return unicode(fake.pystr(max_chars=5) + '***')
 
 
 def _fake_list(attr_name, ttype_conf):

@@ -10,6 +10,8 @@ import inspect
 import collections
 import json
 import yaml
+import re
+from dictdiffer import diff
 from thrift_fake import fake_request_param
 from dict_format_print import format_dict
 from dict_replace import replace_dict
@@ -26,7 +28,7 @@ def __get_need_test_methods_from_handler(test_handler):
     """从指定Handler获取需要测试的方法（包含一些非IDL的方法，后面会处理掉）"""
     need_test_methods = list()
     for name, obj in inspect.getmembers(test_handler):
-        if inspect.ismethod(obj):
+        if inspect.ismethod(obj) and not re.search('gen_idl', obj.__func__.func_code.co_filename):
             need_test_methods.append(name)
     return need_test_methods
 
@@ -46,8 +48,11 @@ def __get_service_info_from_thrift(root_path, idl_service, need_test_methods):
         if customized_request_config and method_name in customized_request_config:
             method_request[method_name] = customized_request_config[method_name]
         elif method_name in idl_method_request:
-            request_obj_name = idl_method_request[method_name].thrift_spec[2][3][0].__name__
-            method_request[method_name] = {__to_underscore(request_obj_name): request_obj_name}
+            try:
+                request_obj_name = idl_method_request[method_name].thrift_spec[2][3][0].__name__
+                method_request[method_name] = {__to_underscore(request_obj_name): request_obj_name}
+            except Exception:
+                print 'invalid method name: ' + method_name
 
     return method_request
 
@@ -212,6 +217,7 @@ def __write_test_second(root_path):
 
 def __write_request_params(root_path, request_name_obj, existed_requests_param):
     """复写单测参数，支持向后兼容"""
+
     with open(os.path.join(
             root_path, 'test_red', 'test_handler', 'requests_param.py'), 'w') as f:
         print 'Create test params --------------------'
@@ -226,6 +232,7 @@ def __write_request_params(root_path, request_name_obj, existed_requests_param):
                 replace_dict(existed_request_param, request_param)
                 if existed_request_param != request_param:
                     print 'Change test params of ' + name
+                    print list(diff(existed_request_param, request_param))
             else:
                 print 'Create test params of ' + name
 
@@ -316,7 +323,7 @@ def generate_red_test(root_path, test_handlers, test_service, test_request):
 #     import sys
 #     sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 #     from frame import ENV
-#     from handler.stockage_handler import StockageHandler
-#     import stockage_service.request.ttypes as test_request
-#     import stockage_service.StockageService as test_service
-#     generate_red_test(ENV['root'], StockageHandler, test_service, test_request)
+#     from handler.route_handler import RouteHandler
+#     import interlogistics_service.request.ttypes as test_request
+#     import interlogistics_service.InterlogisticService as test_service
+#     generate_red_test(ENV['root'], RouteHandler, test_service, test_request)

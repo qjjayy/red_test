@@ -13,7 +13,10 @@ def format_dict(dict_string):
         line_length += 1
         if line_length > 100:
             j = i
-            while j > 0 and item_list[j] != ",":
+            while (j > 0 and not (
+                   item_list[j] == "," and
+                   item_list[j + 1] == " " and
+                   item_list[j + 2] == "\"")):
                 j -= 1
             add_return_after(item_list, j + 1, tap_deep)
             line_length = (tap_deep - 1) * 4 + (i - j)

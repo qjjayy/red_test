@@ -37,21 +37,26 @@ def _replace_list(attr_name, from_dict, to_dict):
 
 def _replace_dict(attr_name, from_dict, to_dict):
     if attr_name:
-        from_dict = from_dict[attr_name]
-        to_dict = to_dict[attr_name]
+        inner_from_dict = from_dict[attr_name]
+        inner_to_dict = to_dict[attr_name]
 
-        if not from_dict:
+        first_key = inner_to_dict.keys()[0]
+        if first_key.endswith('***') or not (
+           type(first_key) == unicode or type(first_key) == str):
             to_dict[attr_name] = from_dict[attr_name]
             return
+    else:
+        inner_from_dict = from_dict
+        inner_to_dict = to_dict
 
-    for key, value in to_dict.items():
-        if key in from_dict.keys():
-            from_type = __get_value_type(from_dict[key])
+    for key, value in inner_to_dict.items():
+        if key in inner_from_dict.keys():
+            from_type = __get_value_type(inner_from_dict[key])
             to_type = __get_value_type(value)
             if from_type == to_type:
-                replace_param(key, from_type, from_dict, to_dict)
-            elif from_dict[key] is None:  # 弥补None导致类型不符的特殊情况
-                to_dict[key] = from_dict[key]
+                replace_param(key, from_type, inner_from_dict, inner_to_dict)
+            elif inner_from_dict[key] is None:  # 弥补None导致类型不符的特殊情况
+                inner_to_dict[key] = inner_from_dict[key]
 
 
 _REPLACE_FUNC = {
