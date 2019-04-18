@@ -290,7 +290,7 @@ def __write_test_methods(root_path, method_request, existed_handler_methods):
                     + ', '.join(request_names) + '):\n')
                 method_content = TAP + 'result = handler_object.' + method_name + '(\n'
                 method_content += TAP + TAP + 'handler_context,\n'
-                method_content += TAP + TAP + request_names[0] + ').data\n'
+                method_content += TAP + TAP + request_names[0] + ')\n'
                 method_content += TAP + 'assert result is not None\n'
                 handler_methods.append(method_decorator + method_header + method_content + '\n\n')
         f.writelines(handler_methods)

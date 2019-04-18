@@ -21,7 +21,8 @@ def _replace_list(attr_name, from_dict, to_dict):
     from_list = from_dict[attr_name]
     to_list = to_dict[attr_name]
 
-    if len(from_list) == 0:
+    from_length = len(from_list)
+    if from_length == 0:
         to_dict[attr_name] = from_dict[attr_name]
         return
 
@@ -29,7 +30,14 @@ def _replace_list(attr_name, from_dict, to_dict):
     to_type = __get_value_type(to_list[0])
     if from_type == to_type:
         if from_type == 'dict':
-            for i in range(LIST_COUNT):
+
+            if from_length < LIST_COUNT:
+                del to_list[-1]
+            elif from_length > LIST_COUNT:
+                for i in range(from_length - LIST_COUNT):
+                    to_list.append(to_list[-1])
+
+            for i in range(from_length):
                 replace_param(None, from_type, from_list[i], to_list[i])
         else:
             to_dict[attr_name] = from_dict[attr_name]
